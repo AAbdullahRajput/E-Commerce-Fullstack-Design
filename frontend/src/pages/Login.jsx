@@ -18,7 +18,7 @@ const Login = () => {
     setLoading(true)
     setError('')
     try {
-      const res = await axios.post('http://localhost:5000/api/auth/login', form, { timeout: 5000 })
+      const res = await axios.post('e-commerce-fullstack-design-production.up.railway.app/api/auth/login', form, { timeout: 5000 })
       localStorage.setItem('token', res.data.token)
       localStorage.setItem('user', JSON.stringify(res.data.user))
       if (res.data.user.role === 'admin') navigate('/admin')
