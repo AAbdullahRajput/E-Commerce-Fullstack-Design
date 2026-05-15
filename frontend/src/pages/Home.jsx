@@ -11,8 +11,7 @@ const Home = () => {
   const [mobileSearchOpen, setMobileSearchOpen] = useState(false)
 
   useEffect(() => {
-    axios.get('e-commerce-fullstack-design-production.up.railway.app/api/products')
-      .then(res => { setProducts(res.data); setLoading(false) })
+axios.get(`${import.meta.env.VITE_API_URL}/api/products`)      .then(res => { setProducts(res.data); setLoading(false) })
       .catch(() => setLoading(false))
   }, [])
 

@@ -27,7 +27,7 @@ const AdminPanel = () => {
 
   const fetchProducts = async () => {
     try {
-      const res = await axios.get('e-commerce-fullstack-design-production.up.railway.app/api/products')
+      const res = await axios.get(`${import.meta.env.VITE_API_URL}
       setProducts(res.data)
     } catch (err) {
       console.error(err)
@@ -56,7 +56,7 @@ const AdminPanel = () => {
         })
         showToast('Product updated successfully!')
       } else {
-        await axios.post('e-commerce-fullstack-design-production.up.railway.app/api/products', form, {
+        await axios.post(`${import.meta.env.VITE_API_URL}{
           headers: { Authorization: `Bearer ${token}` }
         })
         showToast('Product added successfully!')

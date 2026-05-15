@@ -32,7 +32,7 @@ const Cart = () => {
   const fetchCart = async () => {
     try {
       setLoading(true)
-      const res = await axios.get('e-commerce-fullstack-design-production.up.railway.app/api/cart', {
+      const res = await axios.get(`${import.meta.env.VITE_API_URL}
         headers: { Authorization: `Bearer ${token}` }
       })
       setCart(res.data)
@@ -97,7 +97,7 @@ const Cart = () => {
       return
     }
     try {
-      await axios.delete('e-commerce-fullstack-design-production.up.railway.app/api/cart', {
+      await axios.delete(`${import.meta.env.VITE_API_URL}
         headers: { Authorization: `Bearer ${token}` }
       })
       setCart([])

@@ -47,7 +47,7 @@ const ProductDetails = () => {
     const token = localStorage.getItem('token')
     if (token) {
       try {
-        await axios.post('e-commerce-fullstack-design-production.up.railway.app/api/cart',
+        await axios.post(`${import.meta.env.VITE_API_URL}
           { product_id: product.id, quantity },
           { headers: { Authorization: `Bearer ${token}` } }
         )
