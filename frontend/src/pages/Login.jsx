@@ -19,16 +19,24 @@ const Login = () => {
     setLoading(true)
     setError('')
     try {
-      const res = await axios.post('http://localhost:5000/api/auth/login', form)
+      const res = await axios.post('http://localhost:5000/api/auth/login', form, {
+        timeout: 5000
+      })
       localStorage.setItem('token', res.data.token)
       localStorage.setItem('user', JSON.stringify(res.data.user))
       if (res.data.user.role === 'admin') {
         navigate('/admin')
       } else {
-        navigate('/')
+        navigate('/home')
       }
     } catch (err) {
-      setError(err.response?.data?.message || 'Login failed. Please check your credentials.')
+      if (err.code === 'ECONNABORTED' || err.message.includes('timeout')) {
+        setError('Server not responding. Please start the backend server.')
+      } else if (!err.response) {
+        setError('Cannot connect to server. Make sure backend is running on port 5000.')
+      } else {
+        setError(err.response?.data?.message || 'Login failed. Please check your credentials.')
+      }
       setLoading(false)
     }
   }
@@ -50,7 +58,8 @@ const Login = () => {
         .login-left {
           display: none;
           width: 50%;
-          background: linear-gradient(145deg, #0f3460 0%, #1a56db 50%, #0ea5e9 100%);
+          background: linear-gradient(145deg, #064e3b 0%, #059669 50%, #10b981 100%);
+
           position: relative;
           overflow: hidden;
           flex-direction: column;
@@ -73,7 +82,7 @@ const Login = () => {
           position: absolute;
           width: 300px; height: 300px;
           border-radius: 50%;
-          background: radial-gradient(circle, rgba(14,165,233,0.25) 0%, transparent 70%);
+          background: radial-gradient(circle, rgba(16,185,129,0.25) 0%, transparent 70%);
           bottom: 80px; left: -60px;
           animation: float2 10s ease-in-out infinite;
         }
@@ -128,7 +137,7 @@ const Login = () => {
         }
         .left-heading em {
           font-style: italic;
-          color: #7dd3fc;
+          color: #a7f3d0;
         }
 
         .left-sub {
@@ -215,16 +224,16 @@ const Login = () => {
         }
         .brand-icon {
           width: 40px; height: 40px;
-          background: linear-gradient(135deg, #1a56db, #0ea5e9);
+          background: linear-gradient(135deg, #059669, #10b981);
           border-radius: 12px;
           display: flex; align-items: center; justify-content: center;
           font-size: 18px;
-          box-shadow: 0 4px 14px rgba(26,86,219,0.35);
+          box-shadow: 0 4px 14px rgba(5,150,105,0.35);
         }
         .brand-name {
           font-size: 20px;
           font-weight: 800;
-          color: #1a56db;
+          color: #059669;
           letter-spacing: -0.5px;
         }
 
@@ -277,7 +286,7 @@ const Login = () => {
           pointer-events: none;
           transition: color 0.2s;
         }
-        .field-icon.focused { color: #1a56db; }
+        .field-icon.focused { color: #059669; }
 
         .field-input {
           width: 100%;
@@ -293,8 +302,8 @@ const Login = () => {
           box-sizing: border-box;
         }
         .field-input:focus {
-          border-color: #1a56db;
-          box-shadow: 0 0 0 3px rgba(26,86,219,0.1);
+          border-color: #059669;
+          box-shadow: 0 0 0 3px rgba(5,150,105,0.1);
         }
         .field-input.has-right { padding-right: 44px; }
         .field-input::placeholder { color: #cbd5e1; }
@@ -312,7 +321,7 @@ const Login = () => {
           display: flex;
           align-items: center;
         }
-        .pw-toggle:hover { color: #1a56db; }
+        .pw-toggle:hover { color: #059669; }
 
         .forgot-row {
           display: flex;
@@ -322,7 +331,7 @@ const Login = () => {
         }
         .forgot-link {
           font-size: 13px;
-          color: #1a56db;
+          color: #059669;
           text-decoration: none;
           font-weight: 500;
         }
@@ -330,7 +339,7 @@ const Login = () => {
 
         .submit-btn {
           width: 100%;
-          background: linear-gradient(135deg, #1a56db, #0ea5e9);
+          background: linear-gradient(135deg, #059669, #10b981);
           color: white;
           border: none;
           border-radius: 12px;
@@ -342,12 +351,12 @@ const Login = () => {
           position: relative;
           overflow: hidden;
           transition: opacity 0.2s, transform 0.15s, box-shadow 0.2s;
-          box-shadow: 0 4px 18px rgba(26,86,219,0.3);
+          box-shadow: 0 4px 18px rgba(5,150,105,0.3);
           letter-spacing: 0.2px;
         }
         .submit-btn:hover:not(:disabled) {
           transform: translateY(-1px);
-          box-shadow: 0 6px 24px rgba(26,86,219,0.4);
+          box-shadow: 0 6px 24px rgba(5,150,105,0.4);
         }
         .submit-btn:active:not(:disabled) { transform: translateY(0); }
         .submit-btn:disabled { opacity: 0.7; cursor: not-allowed; }
@@ -412,7 +421,7 @@ const Login = () => {
         .social-btn:hover {
           border-color: #bfdbfe;
           background: #f0f7ff;
-          box-shadow: 0 2px 8px rgba(26,86,219,0.08);
+          box-shadow: 0 2px 8px rgba(5,150,105,0.08);
         }
 
         .signup-row {
@@ -421,7 +430,7 @@ const Login = () => {
           color: #64748b;
         }
         .signup-link {
-          color: #1a56db;
+          color: #059669;
           font-weight: 700;
           text-decoration: none;
         }
@@ -438,7 +447,7 @@ const Login = () => {
           text-decoration: none;
           transition: color 0.2s;
         }
-        .back-home:hover { color: #1a56db; }
+        .back-home:hover { color: #059669; }
 
         /* Mobile-specific tweaks */
         @media (max-width: 480px) {

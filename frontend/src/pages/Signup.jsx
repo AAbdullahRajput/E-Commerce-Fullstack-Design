@@ -73,7 +73,7 @@ const Signup = () => {
         .signup-left {
           display: none;
           width: 46%;
-          background: linear-gradient(145deg, #0f3460 0%, #1a56db 55%, #0ea5e9 100%);
+          background: linear-gradient(145deg, #064e3b 0%, #059669 55%, #10b981 100%);
           position: relative;
           overflow: hidden;
           flex-direction: column;
@@ -92,7 +92,7 @@ const Signup = () => {
         }
         .left-glow-2 {
           position: absolute; width: 320px; height: 320px; border-radius: 50%;
-          background: radial-gradient(circle, rgba(14,165,233,0.22) 0%, transparent 70%);
+          background: radial-gradient(circle, rgba(16,185,129,0.22) 0%, transparent 70%);
           bottom: 70px; left: -70px;
           animation: float2 11s ease-in-out infinite;
         }
@@ -202,11 +202,11 @@ const Signup = () => {
         }
         .brand-icon {
           width: 40px; height: 40px;
-          background: linear-gradient(135deg, #1a56db, #0ea5e9);
+          background: linear-gradient(135deg, #059669, #10b981);
           border-radius: 12px; display: flex; align-items: center; justify-content: center;
-          font-size: 18px; box-shadow: 0 4px 14px rgba(26,86,219,0.35);
+          font-size: 18px; box-shadow: 0 4px 14px rgba(5,150,105,0.35);
         }
-        .brand-name { font-size: 20px; font-weight: 800; color: #1a56db; letter-spacing: -0.5px; }
+        .brand-name { font-size: 20px; font-weight: 800; color: #059669; letter-spacing: -0.5px; }
 
         .card-title {
           font-size: 25px; font-weight: 800; color: #0f172a;
@@ -237,7 +237,7 @@ const Signup = () => {
           position: absolute; left: 14px; top: 50%; transform: translateY(-50%);
           color: #94a3b8; pointer-events: none; transition: color 0.2s;
         }
-        .field-icon.focused { color: #1a56db; }
+        .field-icon.focused { color: #059669; }
 
         .field-input {
           width: 100%; border: 1.5px solid #e2e8f0; border-radius: 12px;
@@ -248,8 +248,8 @@ const Signup = () => {
           box-sizing: border-box;
         }
         .field-input:focus {
-          border-color: #1a56db;
-          box-shadow: 0 0 0 3px rgba(26,86,219,0.1);
+          border-color: #059669;
+          box-shadow: 0 0 0 3px rgba(5,150,105,0.1);
         }
         .field-input.has-right { padding-right: 44px; }
         .field-input::placeholder { color: #cbd5e1; }
@@ -259,7 +259,7 @@ const Signup = () => {
           background: none; border: none; cursor: pointer; color: #94a3b8;
           padding: 2px; display: flex; align-items: center;
         }
-        .pw-toggle:hover { color: #1a56db; }
+        .pw-toggle:hover { color: #059669; }
 
         /* Strength bar */
         .strength-wrap {
@@ -289,8 +289,8 @@ const Signup = () => {
           margin-top: 1px;
         }
         .check-box.checked {
-          background: linear-gradient(135deg, #1a56db, #0ea5e9);
-          border-color: #1a56db;
+          background: linear-gradient(135deg, #059669, #10b981);
+          border-color: #059669;
         }
         .check-text { font-size: 12.5px; color: #64748b; line-height: 1.5; }
         .check-text a { color: #1a56db; text-decoration: none; font-weight: 500; }
@@ -298,17 +298,17 @@ const Signup = () => {
 
         .submit-btn {
           width: 100%;
-          background: linear-gradient(135deg, #1a56db, #0ea5e9);
+          background: linear-gradient(135deg, #059669, #10b981);
           color: white; border: none; border-radius: 12px; padding: 14px;
           font-size: 15px; font-weight: 700;
           font-family: 'Plus Jakarta Sans', sans-serif;
           cursor: pointer; position: relative; overflow: hidden;
           transition: opacity 0.2s, transform 0.15s, box-shadow 0.2s;
-          box-shadow: 0 4px 18px rgba(26,86,219,0.3); letter-spacing: 0.2px;
+          box-shadow: 0 4px 18px rgba(5,150,105,0.3); letter-spacing: 0.2px;
         }
         .submit-btn:hover:not(:disabled) {
           transform: translateY(-1px);
-          box-shadow: 0 6px 24px rgba(26,86,219,0.4);
+          box-shadow: 0 6px 24px rgba(5,150,105,0.4);
         }
         .submit-btn:active:not(:disabled) { transform: translateY(0); }
         .submit-btn:disabled { opacity: 0.7; cursor: not-allowed; }
@@ -346,13 +346,13 @@ const Signup = () => {
         }
         .social-btn:hover {
           border-color: #bfdbfe; background: #f0f7ff;
-          box-shadow: 0 2px 8px rgba(26,86,219,0.08);
+          box-shadow: 0 2px 8px rgba(5,150,105,0.08);
         }
 
         .signin-row {
           text-align: center; font-size: 13.5px; color: #64748b; margin-top: 1.3rem;
         }
-        .signin-link { color: #1a56db; font-weight: 700; text-decoration: none; }
+        .signin-link { color: #059669; font-weight: 700; text-decoration: none; }
         .signin-link:hover { text-decoration: underline; }
 
         .back-home {
@@ -360,7 +360,7 @@ const Signup = () => {
           margin-top: 12px; font-size: 13px; color: #94a3b8; text-decoration: none;
           transition: color 0.2s;
         }
-        .back-home:hover { color: #1a56db; }
+        .back-home:hover { color: #059669; }
 
         @media (max-width: 480px) {
           .signup-right { padding: 1.5rem 1rem; align-items: flex-start; padding-top: 2rem; }

@@ -293,8 +293,7 @@ const Home = () => {
         {/* Hero banner */}
         <div className="flex-1 rounded-xl relative overflow-hidden min-h-[250px]" style={{ background: '#3bb5a6' }}>
           <img
-            src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=900"
-            alt="Hero electronics"
+            src="https://images.unsplash.com/photo-1600294037681-c80b4cb5b434?w=900"            alt="Hero electronics"
             className="absolute inset-0 w-full h-full object-cover object-center"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-teal-500/75 via-teal-400/50 to-transparent" />
@@ -454,7 +453,7 @@ const Home = () => {
               </button>
             </div>
             <img
-              src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=500"
+              src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=500"
               alt="Home and outdoor"
               className="w-20 h-20 md:w-full md:h-36 object-cover rounded-lg md:mt-4"
             />
@@ -492,7 +491,7 @@ const Home = () => {
               </button>
             </div>
             <img
-              src="https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=500"
+              src="https://images.unsplash.com/photo-1498049794561-7780e7231661?w=500"
               alt="Consumer electronics"
               className="w-20 h-20 md:w-full md:h-36 object-cover rounded-lg md:mt-4"
             />
