@@ -1,6 +1,8 @@
 # 🛒 E-Commerce Fullstack Design
 
-A full-stack e-commerce web application built with **React**, **Node.js/Express**, and **Supabase** — deployed live on Vercel (frontend) and Railway (backend).
+A full-stack e-commerce **design prototype** built with **React**, **Node.js/Express**, and **Supabase** — deployed live on Vercel (frontend) and Railway (backend).
+
+> ⚠️ **Note:** This is a design/demo project with basic frontend & backend functionality and a limited access control system. Sessions are not fully maintained. For production use, upgrades are needed in data integrity, authentication, session management, and access control.
 
 🌐 **Live Demo:** [e-commerce-fullstack-design-blush.vercel.app](https://e-commerce-fullstack-design-blush.vercel.app)
 
@@ -9,6 +11,7 @@ A full-stack e-commerce web application built with **React**, **Node.js/Express*
 ## 📋 Table of Contents
 
 - [Overview](#overview)
+- [Current Scope & Limitations](#current-scope--limitations)
 - [Features](#features)
 - [Tech Stack](#tech-stack)
 - [Project Structure](#project-structure)
@@ -18,12 +21,29 @@ A full-stack e-commerce web application built with **React**, **Node.js/Express*
 - [Environment Variables](#environment-variables)
 - [Local Development Setup](#local-development-setup)
 - [Deployment](#deployment)
+- [Future Upgrades Needed](#future-upgrades-needed)
 
 ---
 
 ## Overview
 
-This is a complete e-commerce platform where users can browse products, search and filter by category, manage a shopping cart, and register/login with JWT authentication. Admins have a dedicated panel to add, edit, and delete products.
+This is a demonstration e-commerce platform where users can browse products, search and filter by category, manage a shopping cart, and register/login with basic JWT authentication. Admins have a dedicated panel to add, edit, and delete products. Built as a design project to showcase fullstack development skills.
+
+---
+
+## Current Scope & Limitations
+
+| Area | Current State |
+|------|--------------|
+| Authentication | Basic JWT — no refresh tokens, no session expiry handling |
+| Access Control | Role check (`user` / `admin`) — limited, not fully enforced on frontend |
+| Sessions | Not fully maintained — token stored in localStorage only |
+| Data Integrity | No database-level constraints or transactions |
+| Input Validation | Minimal — no thorough server-side validation |
+| Error Handling | Basic try/catch — not production-grade |
+| Security | No rate limiting, no HTTPS enforcement, no CSRF protection |
+
+> This project is intended as a **design prototype**. A production system would require significant upgrades in all areas above.
 
 ---
 
@@ -40,17 +60,17 @@ This is a complete e-commerce platform where users can browse products, search a
 - 🧾 Order summary with discount calculation
 
 ### Admin Features
-- 🔑 Admin-only protected route
+- 🔑 Admin-only protected route (`/admin`)
 - ➕ Add new products
 - ✏️ Edit existing products
 - 🗑️ Delete products
 - 📋 View all products in a management table
 
 ### Technical Features
-- ✅ JWT-based auth with role-based access (user / admin)
+- ✅ JWT-based auth with role field (`user` / `admin`)
 - ✅ Password hashing with bcryptjs
-- ✅ Persistent cart stored in Supabase (logged-in users) or localStorage (guests)
-- ✅ React Router v7 with client-side navigation
+- ✅ Persistent cart in Supabase (logged-in) or localStorage (guest)
+- ✅ React Router v7 client-side navigation
 - ✅ Vercel rewrites for SPA routing
 - ✅ Environment-aware dotenv (dev only)
 - ✅ CORS enabled for cross-origin API calls
@@ -74,43 +94,37 @@ This is a complete e-commerce platform where users can browse products, search a
 
 ```
 ecommerece-fullstack-design/
-├── frontend/                   # React + Vite app
+├── frontend/                        # React + Vite app
 │   ├── public/
-│   │   ├── favicon.svg
-│   │   └── icons.svg
 │   ├── src/
 │   │   ├── assets/
-│   │   │   └── hero.png
 │   │   ├── pages/
 │   │   │   ├── admin/
-│   │   │   │   └── AdminPanel.jsx    # Product management (admin only)
-│   │   │   ├── Home.jsx              # Landing page with featured products
-│   │   │   ├── ProductListing.jsx    # All products with search & filter
-│   │   │   ├── ProductDetails.jsx    # Single product + related items
-│   │   │   ├── Cart.jsx              # Shopping cart & checkout summary
-│   │   │   ├── Login.jsx             # Login form
-│   │   │   └── Signup.jsx            # Registration form
-│   │   ├── App.jsx                   # Routes definition
-│   │   ├── main.jsx                  # React entry point
-│   │   └── index.css                 # Global styles
-│   ├── vercel.json                   # Vercel SPA rewrite config
-│   ├── tailwind.config.js
-│   ├── vite.config.js
+│   │   │   │   └── AdminPanel.jsx   # Product management (admin only)
+│   │   │   ├── Home.jsx             # Landing page
+│   │   │   ├── ProductListing.jsx   # All products with search & filter
+│   │   │   ├── ProductDetails.jsx   # Single product + related items
+│   │   │   ├── Cart.jsx             # Shopping cart & checkout summary
+│   │   │   ├── Login.jsx            # Login form
+│   │   │   └── Signup.jsx           # Registration form
+│   │   ├── App.jsx                  # Routes definition
+│   │   └── main.jsx
+│   ├── vercel.json
 │   └── package.json
 │
-└── backend/                    # Node.js + Express API
+└── backend/                         # Node.js + Express API
     ├── config/
-    │   └── supabase.js               # Supabase client setup
+    │   └── supabase.js              # Supabase client
     ├── controllers/
-    │   ├── authController.js         # Register & Login logic
-    │   └── productController.js      # CRUD product logic
+    │   ├── authController.js        # Register & Login logic
+    │   └── productController.js     # CRUD product logic
     ├── middleware/
-    │   └── authMiddleware.js         # JWT protect + adminOnly
+    │   └── authMiddleware.js        # JWT protect + adminOnly
     ├── routes/
-    │   ├── authRoutes.js             # POST /register, POST /login
-    │   ├── productRoutes.js          # GET/POST/PUT/DELETE /products
-    │   └── cartRoutes.js             # Cart CRUD routes
-    ├── server.js                     # Express app entry point
+    │   ├── authRoutes.js
+    │   ├── productRoutes.js
+    │   └── cartRoutes.js
+    ├── server.js
     └── package.json
 ```
 
@@ -138,15 +152,15 @@ ecommerece-fullstack-design/
 | Method | Endpoint | Description |
 |--------|----------|-------------|
 | POST | `/api/auth/register` | Register a new user |
-| POST | `/api/auth/login` | Login and get JWT token |
+| POST | `/api/auth/login` | Login and receive JWT token |
 
 ### Products — `/api/products`
 
 | Method | Endpoint | Access | Description |
 |--------|----------|--------|-------------|
-| GET | `/api/products` | Public | Get all products (supports `?search=` and `?category=`) |
-| GET | `/api/products/:id` | Public | Get single product by ID |
-| POST | `/api/products` | Admin | Create new product |
+| GET | `/api/products` | Public | Get all products (`?search=` & `?category=` supported) |
+| GET | `/api/products/:id` | Public | Get single product |
+| POST | `/api/products` | Admin | Create product |
 | PUT | `/api/products/:id` | Admin | Update product |
 | DELETE | `/api/products/:id` | Admin | Delete product |
 
@@ -154,7 +168,7 @@ ecommerece-fullstack-design/
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
-| GET | `/api/cart` | Get current user's cart |
+| GET | `/api/cart` | Get user's cart |
 | POST | `/api/cart` | Add item to cart |
 | PATCH | `/api/cart/:id` | Update item quantity |
 | DELETE | `/api/cart/:id` | Remove single item |
@@ -166,7 +180,7 @@ ecommerece-fullstack-design/
 
 ## Database Schema
 
-### `users` table
+### `users`
 | Column | Type | Notes |
 |--------|------|-------|
 | id | uuid | Primary key |
@@ -175,7 +189,7 @@ ecommerece-fullstack-design/
 | password | text | bcrypt hashed |
 | role | text | `user` or `admin` |
 
-### `products` table
+### `products`
 | Column | Type | Notes |
 |--------|------|-------|
 | id | uuid | Primary key |
@@ -184,15 +198,15 @@ ecommerece-fullstack-design/
 | category | text | e.g. Electronics, Clothes |
 | image | text | Image URL |
 | featured | boolean | Show on home page |
-| discount | numeric | Discount percentage |
+| discount | numeric | Discount % |
 
-### `cart` table
+### `cart`
 | Column | Type | Notes |
 |--------|------|-------|
 | id | uuid | Primary key |
 | user_id | uuid | FK → users.id |
 | product_id | uuid | FK → products.id |
-| quantity | integer | Item quantity |
+| quantity | integer | Item count |
 
 ---
 
@@ -211,57 +225,36 @@ PORT=5000
 VITE_API_URL=http://localhost:5000
 ```
 
-> For production, set `VITE_API_URL` to your Railway backend URL in Vercel's environment variables.
-
 ---
 
 ## Local Development Setup
 
 ### Prerequisites
 - Node.js v18+
-- A [Supabase](https://supabase.com) account and project
+- Supabase account and project
 
-### 1. Clone the repository
+### 1. Clone the repo
 ```bash
 git clone https://github.com/AAbdullahRajput/E-Commerce-Fullstack-Design.git
 cd ecommerece-fullstack-design
 ```
 
-### 2. Setup the Backend
+### 2. Backend
 ```bash
 cd backend
 npm install
-```
-
-Create a `.env` file in the `backend/` folder:
-```env
-SUPABASE_URL=your_supabase_url
-SUPABASE_SERVICE_KEY=your_service_key
-JWT_SECRET=your_secret_key
-PORT=5000
-```
-
-Start the backend:
-```bash
+# create .env with variables above
 npm run dev
-# Server runs on http://localhost:5000
+# runs on http://localhost:5000
 ```
 
-### 3. Setup the Frontend
+### 3. Frontend
 ```bash
 cd frontend
 npm install
-```
-
-Create a `.env` file in the `frontend/` folder:
-```env
-VITE_API_URL=http://localhost:5000
-```
-
-Start the frontend:
-```bash
+# create .env with VITE_API_URL=http://localhost:5000
 npm run dev
-# App runs on http://localhost:5173
+# runs on http://localhost:5173
 ```
 
 ---
@@ -269,26 +262,30 @@ npm run dev
 ## Deployment
 
 ### Backend → Railway
-1. Push code to GitHub
-2. Create a new Railway project → deploy from GitHub
-3. Add environment variables: `SUPABASE_URL`, `SUPABASE_SERVICE_KEY`, `JWT_SECRET`
-4. Railway auto-deploys on every push
+1. Push to GitHub
+2. Create Railway project → deploy from repo
+3. Add env vars: `SUPABASE_URL`, `SUPABASE_SERVICE_KEY`, `JWT_SECRET`
 
 ### Frontend → Vercel
-1. Import GitHub repo on [vercel.com](https://vercel.com)
-2. Set **Root Directory** to `frontend`
-3. Add environment variable: `VITE_API_URL=https://your-railway-url.railway.app`
-4. Vercel auto-deploys on every push to `main`
+1. Import repo on Vercel, set root directory to `frontend`
+2. Add env var: `VITE_API_URL=https://your-railway-url.railway.app`
+3. Auto-deploys on every push to `main`
 
-The `frontend/vercel.json` handles SPA routing:
-```json
-{
-  "buildCommand": "npm run build",
-  "outputDirectory": "dist",
-  "framework": "vite",
-  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
-}
-```
+---
+
+## Future Upgrades Needed
+
+For production readiness, the following improvements are recommended:
+
+- **Authentication:** Add refresh tokens, token blacklisting on logout, and proper session expiry
+- **Access Control:** Enforce role checks on the frontend via protected route components
+- **Input Validation:** Server-side validation with `Joi` or `express-validator`
+- **Data Integrity:** Database-level constraints, foreign key enforcement, and transactions
+- **Security:** Rate limiting (`express-rate-limit`), helmet.js headers, CSRF protection
+- **Error Handling:** Centralized error handler with proper HTTP status codes
+- **Orders:** Proper checkout flow with order history tracking
+- **Payments:** Payment gateway integration (e.g. Stripe)
+- **Image Uploads:** File upload support via Supabase Storage instead of URL-only
 
 ---
 
