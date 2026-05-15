@@ -30,18 +30,18 @@ const Cart = () => {
   }, [])
 
   const fetchCart = async () => {
-    try {
-      setLoading(true)
-      const res = await axios.get(`${import.meta.env.VITE_API_URL}
-        headers: { Authorization: `Bearer ${token}` }
-      })
-      setCart(res.data)
-    } catch (err) {
-      console.error(err)
-    } finally {
-      setLoading(false)
-    }
+  try {
+    setLoading(true)
+    const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/cart`, {
+      headers: { Authorization: `Bearer ${token}` }
+    })
+    setCart(res.data)
+  } catch (err) {
+    console.error(err)
+  } finally {
+    setLoading(false)
   }
+}
 
   const updateQuantity = async (cartItemId, newQty) => {
     if (!token) {
@@ -58,7 +58,7 @@ const Cart = () => {
       return
     }
     try {
-      await axios.patch(`e-commerce-fullstack-design-production.up.railway.app/api/cart/${cartItemId}`,
+      await axios.patch(`${import.meta.env.VITE_API_URL}/api/cart/${cartItemId}`,
         { quantity: newQty },
         { headers: { Authorization: `Bearer ${token}` } }
       )
@@ -81,7 +81,8 @@ const Cart = () => {
       return
     }
     try {
-      await axios.delete(`e-commerce-fullstack-design-production.up.railway.app/api/cart/${cartItemId}`, {
+      await axios.delete(`${import.meta.env.VITE_API_URL}/api/cart/${cartItemId}`,
+ {
         headers: { Authorization: `Bearer ${token}` }
       })
       setCart(prev => prev.filter(i => i.id !== cartItemId))
@@ -91,20 +92,20 @@ const Cart = () => {
   }
 
   const clearCart = async () => {
-    if (!token) {
-      localStorage.removeItem('cart')
-      setCart([])
-      return
-    }
-    try {
-      await axios.delete(`${import.meta.env.VITE_API_URL}
-        headers: { Authorization: `Bearer ${token}` }
-      })
-      setCart([])
-    } catch (err) {
-      console.error(err)
-    }
+  if (!token) {
+    localStorage.removeItem('cart')
+    setCart([])
+    return
   }
+  try {
+    await axios.delete(`${import.meta.env.VITE_API_URL}/api/cart`, {
+      headers: { Authorization: `Bearer ${token}` }
+    })
+    setCart([])
+  } catch (err) {
+    console.error(err)
+  }
+}
 
   const applyCoupon = () => {
     if (coupon.trim().toLowerCase() === 'save10') {

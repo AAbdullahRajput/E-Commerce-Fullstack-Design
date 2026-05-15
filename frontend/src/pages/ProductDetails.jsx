@@ -23,7 +23,7 @@ const ProductDetails = () => {
   const fetchProduct = async () => {
     try {
       setLoading(true)
-      const res = await axios.get(`e-commerce-fullstack-design-production.up.railway.app/api/products/${id}`)
+      const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/products/${id}`)
       setProduct(res.data)
       fetchRelated(res.data.category)
     } catch (err) {
@@ -35,7 +35,7 @@ const ProductDetails = () => {
 
   const fetchRelated = async (category) => {
     try {
-      const res = await axios.get(`e-commerce-fullstack-design-production.up.railway.app/api/products?category=${category}&limit=6`)
+      const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/products?category=${category}&limit=6`)
       const all = Array.isArray(res.data) ? res.data : res.data.products || []
       setRelatedProducts(all.filter(p => p.id !== id).slice(0, 6))
     } catch (err) {
@@ -47,7 +47,7 @@ const ProductDetails = () => {
     const token = localStorage.getItem('token')
     if (token) {
       try {
-        await axios.post(`${import.meta.env.VITE_API_URL}
+        await axios.post(`${import.meta.env.VITE_API_URL}/api/cart`,
           { product_id: product.id, quantity },
           { headers: { Authorization: `Bearer ${token}` } }
         )
