@@ -27,7 +27,7 @@ const AdminPanel = () => {
 
   const fetchProducts = async () => {
     try {
-      const res = await axios.get(`${import.meta.env.VITE_API_URL}
+      const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/products`)
       setProducts(res.data)
     } catch (err) {
       console.error(err)
@@ -51,12 +51,12 @@ const AdminPanel = () => {
     const token = localStorage.getItem('token')
     try {
       if (editProduct) {
-        await axios.put(`e-commerce-fullstack-design-production.up.railway.app/api/products/${editProduct.id}`, form, {
+        await axios.put(`${import.meta.env.VITE_API_URL}/api/products/${editProduct.id}`, form, {
           headers: { Authorization: `Bearer ${token}` }
         })
         showToast('Product updated successfully!')
       } else {
-        await axios.post(`${import.meta.env.VITE_API_URL}{
+        await axios.post(`${import.meta.env.VITE_API_URL}/api/products`, form, {
           headers: { Authorization: `Bearer ${token}` }
         })
         showToast('Product added successfully!')
@@ -86,7 +86,7 @@ const AdminPanel = () => {
   const handleDelete = async id => {
     const token = localStorage.getItem('token')
     try {
-      await axios.delete(`e-commerce-fullstack-design-production.up.railway.app/api/products/${id}`, {
+      await axios.delete(`${import.meta.env.VITE_API_URL}/api/products/${id}`, {
         headers: { Authorization: `Bearer ${token}` }
       })
       showToast('Product deleted.')
