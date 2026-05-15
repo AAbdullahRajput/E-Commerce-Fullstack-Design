@@ -2,6 +2,8 @@ import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
+const API = import.meta.env.VITE_API_URL;
+
 const Signup = () => {
   const [form, setForm] = useState({ name: '', email: '', password: '', confirmPassword: '' })
   const [error, setError] = useState('')
@@ -21,7 +23,7 @@ const Signup = () => {
     setLoading(true)
     setError('')
     try {
-      const res = await axios.post('e-commerce-fullstack-design-production.up.railway.app/api/auth/register', {
+      const res = await axios.post(`${API}/api/auth/register`, {
         name: form.name, email: form.email, password: form.password,
       })
       localStorage.setItem('token', res.data.token)
