@@ -2,6 +2,9 @@ import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
+
+const API = import.meta.env.VITE_API_URL;
+
 const Login = () => {
   const [form, setForm] = useState({ email: '', password: '' })
   const [error, setError] = useState('')
@@ -18,16 +21,22 @@ const Login = () => {
     setLoading(true)
     setError('')
     try {
-      const res = await axios.post('e-commerce-fullstack-design-production.up.railway.app/api/auth/login', form, { timeout: 5000 })
+      const API = import.meta.env.VITE_API_URL;
+
+const res = await axios.post(
+  `${API}/api/auth/login`,
+  form,
+  { timeout: 5000 }
+);
       localStorage.setItem('token', res.data.token)
       localStorage.setItem('user', JSON.stringify(res.data.user))
       if (res.data.user.role === 'admin') navigate('/admin')
       else navigate('/home')
     } catch (err) {
       if (err.code === 'ECONNABORTED' || err.message.includes('timeout')) {
-        setError('Server not responding. Please start the backend server.')
+        setError('Server not responding.')
       } else if (!err.response) {
-        setError('Cannot connect to server. Make sure backend is running on port 5000.')
+        setError('Cannot connect to server.')
       } else {
         setError(err.response?.data?.message || 'Login failed. Please check your credentials.')
       }
